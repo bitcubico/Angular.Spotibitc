@@ -1,16 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+// Routes
+import { APP_ROUTING } from './app.routes';
+
 import { AppComponent } from './app.component';
+import { ArtistComponent } from './componets/artist/artist.component';
+import { HomeComponent } from './componets/home/home.component';
+import { SearchComponent } from './componets/search/search.component';
+import { NavbarComponent } from './componets/shared/navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ArtistComponent,
+    HomeComponent,
+    SearchComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    APP_ROUTING
   ],
   providers: [],
   bootstrap: [AppComponent]
