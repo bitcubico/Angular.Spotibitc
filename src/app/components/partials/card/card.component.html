@@ -1,0 +1,9 @@
+<div class="card">
+    <img [src]="image" class="card-img-top" [alt]="title">
+    <div class="card-body">
+        <h5 class="card-title">{{ title }}</h5>
+        <p class="card-text">
+            <span class="badge badge-primary" *ngFor="let artist of artists">{{ artist.name }}</span>
+        </p>
+    </div>
+</div>

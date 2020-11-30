@@ -1,8 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './componets/home/home.component';
-import { ArtistComponent } from './componets/artist/artist.component';
-import { SearchComponent } from './componets/search/search.component';
-import { PageNotFoundComponent } from './componets/error/page-not-found/page-not-found.component';
+import { HomeComponent } from './components/home/home.component';
+import { ArtistComponent } from './components/artist/artist.component';
+import { SearchComponent } from './components/search/search.component';
+import { PageNotFoundComponent } from './components/error/page-not-found/page-not-found.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
