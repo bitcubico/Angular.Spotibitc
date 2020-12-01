@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class SpotifyService {
 
-  token: string = "BQD6pnFTwci1H-mdl5cjea6UH_tBJL7_JCOVkAeMdDDn5EQScaLIbcdjJ6Z30rbbLJef-YKM9t8PUKWlSE8";
+  token: string = "BQCA3bVz-Pln1epP1BrXUiB3-dvSHiLqc48dJd-lrXsgfD6cV1LdrjkCV2-FEVbs1fW-ac4l1qR9sx7_ZpY";
   private urlBase: string = 'https://api.spotify.com/v1';
 
   constructor(private _httpClient: HttpClient) {  }

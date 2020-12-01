@@ -5,6 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 // Routes
 import { APP_ROUTING } from './app.routes';
 
+// Pipes
+import { NoimagePipe } from './pipes/noimage.pipe';
+
+// Components
 import { AppComponent } from './app.component';
 import { ArtistComponent } from './components/artist/artist.component';
 import { HomeComponent } from './components/home/home.component';
@@ -19,7 +23,8 @@ import { CardComponent } from './components/partials/card/card.component';
     HomeComponent,
     SearchComponent,
     NavbarComponent,
-    CardComponent
+    CardComponent,
+    NoimagePipe
   ],
   imports: [
     BrowserModule,

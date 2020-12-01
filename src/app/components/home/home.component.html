@@ -1,5 +1,5 @@
 <div class="container mt-5">
     <div class="card-columns">
-        <app-card [title]="album.name" [artists]="album.artists" [image]="album.images[0].url" *ngFor="let album of newReleases"></app-card>
+        <app-card [title]="album.name" [artists]="album.artists" [image]="album.images | noimage" *ngFor="let album of newReleases"></app-card>
     </div>
 </div>
