@@ -1,1 +1,28 @@
-<p>search works!</p>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col">
+            <div class="input-group">
+                <input #keyword type="text" class="form-control" placeholder="Buscador de albumes por artista" (keyup.enter)="searchByArtistName(keyword.value)">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-info" type="button" (click)="searchByArtistName(keyword.value)">Buscar...</button>
+                </div>
+            </div>
+            <small class="form-text text-muted">
+                Ingrese el nombre del artista y obtendrá todo el contenido relacionado
+            </small>
+        </div>
+    </div>
+
+    <div class="card-columns mt-3">
+        <!--<app-card [title]="album.name" [artists]="album.genres" [image]="album.images[0].url" *ngFor="let album of resultSearch"></app-card>-->
+        <div class="card" *ngFor="let album of resultSearch">
+            <img *ngIf="album.images.length > 0" [src]="album.images[0].url" class="card-img-top" [alt]="album.name">
+            <div class="card-body">
+                <h5 class="card-title">{{ album.name }} <small><span class="badge badge-dark">{{ album.followers.total }} seguidores</span></small></h5>
+                <p class="card-text" *ngIf="album.genres.length > 0">
+                    <span class="badge badge-primary" *ngFor="let genre of album.genres">{{ genre }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

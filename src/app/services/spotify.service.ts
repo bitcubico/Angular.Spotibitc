@@ -1,19 +1,19 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { rejects } from 'assert';
-import { promise } from 'protractor';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpotifyService {
 
-  token: string;
+  token: string = "BQD6pnFTwci1H-mdl5cjea6UH_tBJL7_JCOVkAeMdDDn5EQScaLIbcdjJ6Z30rbbLJef-YKM9t8PUKWlSE8";
+  private urlBase: string = 'https://api.spotify.com/v1';
 
   constructor(private _httpClient: HttpClient) {  }
 
-  protected getToken(): Observable<Object>
+  private getToken(): Observable<Object>
   {
     let actionUrl = 'https://accounts.spotify.com/api/token';
     const body = new HttpParams()
@@ -21,21 +21,19 @@ export class SpotifyService {
       .set('client_id', '9c9b92bb870741f9ac0e9ab2a1193a94')
       .set('client_secret', 'b614968ca9a6447ba9f465f7dc61dbdd');
 
-    return this._httpClient.post(actionUrl, body);
+    return this._httpClient.post(actionUrl, body)
+            .pipe( map(data => {
+              return data['access_token'];
+            }));
   }
 
-  getNewReleases(): Observable<Object>
-  {
-    let actionUrl = 'https://api.spotify.com/v1/browse/new-releases';
-    const headers = new HttpHeaders()
-    .set('Authorization', 'Bearer BQBNuioL7ORioHavBFrq7sIXCEwLsd0zO1idntpt6nsBGwHJNBEuLQNkWp2qN2XTWUAYKTAE_iHea2t8fDc');
-
+  private getQuery(query: string): Observable<Object> {
     // Si aún no se ha solicitado token, lo solicito
     if(this.token === undefined) {
       this.getToken().subscribe(
       {
-        next(data) {
-          this.token = data['access_token'];
+        next(response) {
+          this.token = response;
           console.log('Token: ' + this.token);
 
           //headers.set('Authorization', 'Bearer ' + this.token);
@@ -44,7 +42,28 @@ export class SpotifyService {
       });
     }
 
-    console.log(headers)
+    let actionUrl = `${this.urlBase}/${query}`;
+    const headers = new HttpHeaders()
+    .set('Authorization', `Bearer ${this.token}`);
+    //console.log(headers);
+
     return this._httpClient.get(actionUrl, {headers});
+  }
+
+  getNewReleases(): Observable<Object>
+  {
+    let actionUrl = `browse/new-releases`;
+    return this.getQuery(actionUrl)
+            .pipe( map(data => {
+              return data['albums'];
+            }));
+  }
+
+  getByArtistName(keyword: string){
+    let actionUrl = `search?q=${keyword}&type=artist&limit=20`;
+    return this.getQuery(actionUrl)
+            .pipe( map( data => {
+              return data['artists'];
+            }));
   }
 }
