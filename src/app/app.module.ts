@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs, 'es')
+
 
 // Routes
 import { APP_ROUTING } from './app.routes';
@@ -16,6 +20,7 @@ import { SearchComponent } from './components/search/search.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { CardComponent } from './components/partials/card/card.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
+import { AlbumComponent } from './components/album/album.component';
 
 @NgModule({
   declarations: [
@@ -26,14 +31,15 @@ import { LoadingComponent } from './components/shared/loading/loading.component'
     NavbarComponent,
     CardComponent,
     NoimagePipe,
-    LoadingComponent
+    LoadingComponent,
+    AlbumComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     APP_ROUTING
   ],
-  providers: [],
+  providers: [ {provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
