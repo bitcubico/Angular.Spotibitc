@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { CardComponent } from './components/partials/card/card.component';
+import { LoadingComponent } from './components/shared/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CardComponent } from './components/partials/card/card.component';
     SearchComponent,
     NavbarComponent,
     CardComponent,
-    NoimagePipe
+    NoimagePipe,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

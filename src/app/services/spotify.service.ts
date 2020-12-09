@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class SpotifyService {
 
-  token: string = "BQCA3bVz-Pln1epP1BrXUiB3-dvSHiLqc48dJd-lrXsgfD6cV1LdrjkCV2-FEVbs1fW-ac4l1qR9sx7_ZpY";
+  token: string = "BQB0ZvvvLr8DOb8TvvGlTIKQY8tqb3eGhhHJNAgentiG7sFbvzgv32yFf_qzIcVFLQV2kSlWhSUhdF1wpI8";
   private urlBase: string = 'https://api.spotify.com/v1';
 
   constructor(private _httpClient: HttpClient) {  }
@@ -19,7 +19,7 @@ export class SpotifyService {
     const body = new HttpParams()
       .set('grant_type', 'client_credentials')
       .set('client_id', '9c9b92bb870741f9ac0e9ab2a1193a94')
-      .set('client_secret', 'b614968ca9a6447ba9f465f7dc61dbdd');
+      .set('client_secret', '9322f27c757940e68dc0099ab33cea8a');
 
     return this._httpClient.post(actionUrl, body)
             .pipe( map(data => {
