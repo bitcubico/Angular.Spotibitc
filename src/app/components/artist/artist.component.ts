@@ -50,7 +50,8 @@ export class ArtistComponent implements OnInit {
 
   getAlbumes(){
     this.loading_album = true;
-    this._spotifyService.getAlbumesByAritstId(this.artist_id).subscribe( (data:any) => {
+    this._spotifyService.getAlbumesByAritstId(this.artist_id, 50)
+    .subscribe( (data:any) => {
       data['items'].forEach(element => {
         let album: album = {
           id: element['id'],
@@ -65,7 +66,8 @@ export class ArtistComponent implements OnInit {
         this.albumes.push(album);
       });
 
-      console.log(this.albumes);
+      this.total_albumes = data['total'];
+      console.log(this.total_albumes);
       console.log(data);
       this.loading_album = false;
     });

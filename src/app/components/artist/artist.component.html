@@ -12,9 +12,10 @@
                     <div class="card-text border-bottom pb-2">
                         <span class="badge badge-primary " *ngFor="let gen of genres ">{{ gen }}</span>
                         <br>
-                        <small class="text-muted ">Segidores: {{followers | number }} | Popularidad: {{popularity | number}} | </small>
+                        <small class="text-muted ">Segidores: {{followers | followersReducer }} | Popularidad: {{popularity | number}} | </small>
                         <button (click)="getAlbumes()" class="badge badge-warning puntero">
-                            <span *ngIf="loading_album" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Albumes
+                            <span *ngIf="loading_album" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> 
+                            {{total_albumes}} Albumes
                         </button>
                     </div>
                     <div *ngIf="albumes.length > 0">

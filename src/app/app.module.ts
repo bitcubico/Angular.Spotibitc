@@ -21,6 +21,7 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { CardComponent } from './components/partials/card/card.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
 import { AlbumComponent } from './components/album/album.component';
+import { FollowersReducerPipe } from './pipes/followers-reducer.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AlbumComponent } from './components/album/album.component';
     CardComponent,
     NoimagePipe,
     LoadingComponent,
-    AlbumComponent
+    AlbumComponent,
+    FollowersReducerPipe
   ],
   imports: [
     BrowserModule,

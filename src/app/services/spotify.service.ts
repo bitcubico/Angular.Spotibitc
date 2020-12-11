@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class SpotifyService {
 
-  token: string = 'BQAbnNlQALIMVslR-YwjtOu0008RQtJ-e52WD9sgoxAi0L1qzxz7HmXEPnS1Zi-WNaAfbz2-Q0t_tMWmbu0';
+  token: string = 'BQCnFDG5C8KIN7477d1hKROXnrRTPGL8inf51QEfWh1HuBlDvRPVIM8o8avL3mN9Qb2Oh40CvuVudWv8uhc';
   private urlBase: string = 'https://api.spotify.com/v1';
 
   constructor(private _httpClient: HttpClient) {  }
@@ -67,7 +67,7 @@ export class SpotifyService {
             }));
   }
 
-  getAlbumesByAritstId(id: string, next: boolean = false, limit: number = 20): Observable<Object>{
+  getAlbumesByAritstId(id: string, limit: number = 20, next: boolean = false): Observable<Object>{
     let actionUrl = `artists/${id}/albums?limit=${limit}`;
 
     if(next)
