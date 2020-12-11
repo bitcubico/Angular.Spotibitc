@@ -17,9 +17,16 @@
 
     <div class="card-columns mt-3">
         <div class="card" *ngFor="let album of resultSearch">
-            <img [src]="album.images | noimage" class="card-img-top" [alt]="album.name">
+            <a [routerLink]="['/artist', album.id]">
+                <img [src]="album.images | noimage" class="card-img-top" [alt]="album.name">
+            </a>
             <div class="card-body">
-                <h5 class="card-title">{{ album.name }} <small><span class="badge badge-dark">{{ album.followers.total }} seguidores</span></small></h5>
+                <h5 class="card-title">
+                    <a [routerLink]="['/artist', album.id]">{{ album.name }}</a>
+                    <small>
+                        <span class="badge badge-dark">{{ album.followers.total | followersReducer }} seguidores</span>
+                    </small>
+                </h5>
                 <p class="card-text" *ngIf="album.genres.length > 0">
                     <span class="badge badge-primary" *ngFor="let genre of album.genres">{{ genre }}</span>
                 </p>
