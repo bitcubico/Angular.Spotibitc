@@ -2,15 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card',
-  templateUrl: './card.component.html',
-  styles: [
-  ]
+  templateUrl: './card.component.html'
 })
 export class CardComponent implements OnInit {
 
   @Input() title: string;
   @Input() artists: any[] = [];
   @Input() image: string;
+  @Input() id_album: string;
 
   constructor() { }
 

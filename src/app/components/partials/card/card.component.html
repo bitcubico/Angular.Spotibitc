@@ -1,9 +1,13 @@
 <div class="card animated fadeIn fast">
-    <img [src]="image" class="card-img-top" [alt]="title">
+    <a class="puntero" [routerLink]="['/album', id_album]">
+        <img [src]="image" class="card-img-top" [alt]="title">
+    </a>
     <div class="card-body">
-        <h5 class="card-title">{{ title }}</h5>
+        <h5 class="card-title">
+            <a class="text-decoration-none" [routerLink]="['/album', id_album]">{{ title }}</a>
+        </h5>
         <p class="card-text">
-            <span class="badge badge-primary" *ngFor="let artist of artists">{{ artist.name }}</span>
+            <a class="badge badge-primary" *ngFor="let artist of artists" [routerLink]="['/artist', artist.id]">{{ artist.name }}</a>
         </p>
     </div>
 </div>

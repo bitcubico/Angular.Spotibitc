@@ -1,1 +1,46 @@
-<p>artist works!</p>
+<app-loading *ngIf="loading"></app-loading>
+<div *ngIf="loading == false" class="container mt-2">
+    <div class="card mb-3">
+        <div class="row no-gutters">
+            <div class="col-md-4 p-2 border-right">
+                <img [src]="image" class="card-img" [alt]="name">
+                <a [routerLink]="['/home']" class="btn btn-primary btn-lg btn-block mt-2 ">Regresar</a>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title ">{{name}}</h5>
+                    <div class="card-text border-bottom pb-2">
+                        <span class="badge badge-primary " *ngFor="let gen of genres ">{{ gen }}</span>
+                        <br>
+                        <small class="text-muted ">Segidores: {{followers | number }} | Popularidad: {{popularity | number}} | </small>
+                        <button (click)="getAlbumes()" class="badge badge-warning puntero">
+                            <span *ngIf="loading_album" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Albumes
+                        </button>
+                    </div>
+                    <div *ngIf="albumes.length > 0">
+                        <div class="card mb-3" *ngFor="let album of albumes">
+                            <div class="row no-gutters">
+                                <div class="col-md-4">
+                                    <a [routerLink]="['/album', album.id]">
+                                        <img [src]="album.image" class="card-img" [alt]="album.title">
+                                    </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a [routerLink]="['/album', album.id]">
+                                                {{ album.title }}
+                                            </a>
+                                        </h5>
+                                        <p class="card-text">Total Tracks: {{album.total_tracks}}</p>
+                                        <p class="card-text"><small class="text-muted">{{ album.release_date | date }}</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

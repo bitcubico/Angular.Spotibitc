@@ -3,10 +3,12 @@ import { HomeComponent } from './components/home/home.component';
 import { ArtistComponent } from './components/artist/artist.component';
 import { SearchComponent } from './components/search/search.component';
 import { PageNotFoundComponent } from './components/error/page-not-found/page-not-found.component';
+import { AlbumComponent } from './components/album/album.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
-    { path: 'artist', component: ArtistComponent },
+    { path: 'artist/:id', component: ArtistComponent },
+    { path: 'album/:id', component: AlbumComponent },
     { path: 'search', component: SearchComponent},
     { path: 'error/404', component: PageNotFoundComponent},
     // Si la url llega sin ningun parametro se redirecciona al home
