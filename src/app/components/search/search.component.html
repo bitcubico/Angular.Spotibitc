@@ -15,8 +15,8 @@
 
     <app-loading *ngIf="loading"></app-loading>
 
-    <div class="card-columns mt-3">
-        <div class="card" *ngFor="let album of resultSearch">
+    <div *ngIf="!loading" class="card-columns mt-3">
+        <div class="card animated fadeIn" *ngFor="let album of resultSearch">
             <a [routerLink]="['/artist', album.id]">
                 <img [src]="album.images | noimage" class="card-img-top" [alt]="album.name">
             </a>

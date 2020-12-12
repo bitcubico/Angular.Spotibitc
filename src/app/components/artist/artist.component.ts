@@ -20,10 +20,12 @@ export class ArtistComponent implements OnInit {
   loading: boolean;
   loading_album: boolean;
   artist_id: string;
-  image: string;
+  image: any[];
   name: string;
   followers: number;
   popularity: number;
+  external_url: string;
+  top_tracks: any[];
   genres: any[] = [];
   albumes: album[] = [];
   total_albumes: number;
@@ -35,16 +37,24 @@ export class ArtistComponent implements OnInit {
     this.loading = true;
     this._activedRoute.params.subscribe(params => {
       this.artist_id = params['id'];
+      
       this._spotifyService.getArtistDetailById(this.artist_id).subscribe((data:any) => {
         let images: any[] = data['images'];
-        this.image = images[0]['url'];
+        this.image = images;
         this.name = data['name'];
         this.followers = data['followers']['total'];
         this.genres = data['genres'];
         this.popularity = data['popularity'];
+        this.external_url = data['external_urls']['spotify'];
+        
+        this._spotifyService.getTopTracks(this.artist_id).subscribe((data:any) => {
+          this.top_tracks = data;
+          console.log(this.top_tracks);
+          this.loading = false;
+        });
+        
         console.log(data);
-        this.loading = false;
-      })
+      });
     });
   }
 
@@ -52,13 +62,13 @@ export class ArtistComponent implements OnInit {
     this.loading_album = true;
     this._spotifyService.getAlbumesByAritstId(this.artist_id, 50)
     .subscribe( (data:any) => {
-      data['items'].forEach(element => {
+      data.forEach(element => {
         let album: album = {
           id: element['id'],
           title: element['name'],
           type: element['type'],
           artists: element['artists'],
-          image: element['images'][0]['url'],
+          image: element['images'],
           release_date: element['release_date'],
           total_tracks: element['total_tracks']
         };

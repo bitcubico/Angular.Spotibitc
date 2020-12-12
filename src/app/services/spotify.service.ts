@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 })
 export class SpotifyService {
 
-  token: string = 'BQCnFDG5C8KIN7477d1hKROXnrRTPGL8inf51QEfWh1HuBlDvRPVIM8o8avL3mN9Qb2Oh40CvuVudWv8uhc';
+  token: string = 'BQCl8uZD7n__AQbnAnHJIYi7skXgnEkOHs_gjXUaC32589jJsQ7zasi3eaU_yH1zOL1GL3B3gkz33jbrfQo';
   private urlBase: string = 'https://api.spotify.com/v1';
 
   constructor(private _httpClient: HttpClient) {  }
@@ -67,6 +67,14 @@ export class SpotifyService {
             }));
   }
 
+  getTopTracks(id: string): Observable<Object>{
+    let actionUrl = `artists/${id}/top-tracks?market=US`;
+    return this.getQuery(actionUrl)
+            .pipe( map( data => {
+              return data['tracks'];
+            }));
+  }
+
   getAlbumesByAritstId(id: string, limit: number = 20, next: boolean = false): Observable<Object>{
     let actionUrl = `artists/${id}/albums?limit=${limit}`;
 
@@ -75,7 +83,7 @@ export class SpotifyService {
 
     return this.getQuery(actionUrl)
             .pipe( map( data => {
-              return data;
+              return data['items'];
             }));
   }
 
