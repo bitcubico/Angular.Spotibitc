@@ -22,6 +22,7 @@ import { CardComponent } from './components/partials/card/card.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
 import { AlbumComponent } from './components/album/album.component';
 import { FollowersReducerPipe } from './pipes/followers-reducer.pipe';
+import { DomseguroPipe } from './pipes/domseguro.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FollowersReducerPipe } from './pipes/followers-reducer.pipe';
     NoimagePipe,
     LoadingComponent,
     AlbumComponent,
-    FollowersReducerPipe
+    FollowersReducerPipe,
+    DomseguroPipe
   ],
   imports: [
     BrowserModule,
