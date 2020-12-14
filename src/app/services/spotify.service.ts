@@ -13,46 +13,6 @@ export class SpotifyService {
 
   constructor(private _httpClient: HttpClient) {  }
 
-  private getToken(): Observable<Object>
-  {
-    let actionUrl = 'https://accounts.spotify.com/api/token';
-    const body = new HttpParams()
-      .set('grant_type', 'client_credentials')
-      .set('client_id', '9c9b92bb870741f9ac0e9ab2a1193a94')
-      .set('client_secret', '9322f27c757940e68dc0099ab33cea8a');
-
-    return this._httpClient.post(actionUrl, body)
-            .pipe( 
-              map(data => {
-                return data['access_token'];
-              }), 
-              catchError((error) => {
-                throw(error.error)
-              })
-            );
-  }
-
-  private getQuery(query: string): Observable<Object> {
-    // Si aún no se ha solicitado token, lo solicito
-    if(this.token === undefined) {
-      this.getToken().subscribe(
-        (response: any) => {
-          this.token = response;
-          console.log('Token: ' + this.token);
-  
-          //headers.set('Authorization', 'Bearer ' + this.token);
-          //return this._httpClient.get(actionUrl, {headers});
-        });
-    }
-
-    let actionUrl = `${this.urlBase}/${query}`;
-    const headers = new HttpHeaders()
-    .set('Authorization', `Bearer ${this.token}`);
-    //console.log(headers);
-
-    return this._httpClient.get(actionUrl, {headers});
-  }
-
   getNewReleases(): Observable<Object>
   {
     let actionUrl = `browse/new-releases`;
@@ -134,5 +94,47 @@ export class SpotifyService {
                 throw(error.error)
               })
             );
+  }
+
+  private getToken(): Observable<Object>
+  {
+    let actionUrl = 'https://accounts.spotify.com/api/token';
+    const body = new HttpParams()
+      .set('grant_type', 'client_credentials')
+      .set('client_id', '9c9b92bb870741f9ac0e9ab2a1193a94')
+      .set('client_secret', '9322f27c757940e68dc0099ab33cea8a');
+
+    return this._httpClient.post(actionUrl, body)
+            .pipe( 
+              map(data => {
+                return data['access_token'];
+              }), 
+              catchError((error) => {
+                throw(error.error)
+              })
+            );
+  }
+
+  private getQuery(query: string): Observable<Object> {    
+    this.getToken().subscribe(
+      (response: any) => {
+        this.token = response;
+        console.log('Token: ' + this.token);
+      });
+
+    let actionUrl = `${this.urlBase}/${query}`;
+    const headers = new HttpHeaders()
+    .set('Authorization', `Bearer ${this.token}`);
+    //console.log(headers);
+
+    return this._httpClient.get(actionUrl, {headers});
+  }
+
+  private sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
   }
 }

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyService } from 'src/app/services/spotify.service';
@@ -18,7 +19,8 @@ export class AlbumComponent implements OnInit {
   error_message: string;
 
   constructor(private _activedRoute: ActivatedRoute,
-              private _spotifyService: SpotifyService) { }
+              private _spotifyService: SpotifyService,
+              private _location: Location) { }
 
   ngOnInit(): void {
     this.loading = true;
@@ -50,6 +52,10 @@ export class AlbumComponent implements OnInit {
       this.error_message = service_error.error.message;
       this.loading = false;
     });
+  }
+
+  back() {
+    this._location.back();
   }
 
 }
