@@ -23,6 +23,7 @@ import { LoadingComponent } from './components/shared/loading/loading.component'
 import { AlbumComponent } from './components/album/album.component';
 import { FollowersReducerPipe } from './pipes/followers-reducer.pipe';
 import { DomseguroPipe } from './pipes/domseguro.pipe';
+import { AlertsComponent } from './components/shared/alerts/alerts.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DomseguroPipe } from './pipes/domseguro.pipe';
     LoadingComponent,
     AlbumComponent,
     FollowersReducerPipe,
-    DomseguroPipe
+    DomseguroPipe,
+    AlertsComponent
   ],
   imports: [
     BrowserModule,

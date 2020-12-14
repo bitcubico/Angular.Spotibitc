@@ -14,6 +14,8 @@ export class AlbumComponent implements OnInit {
   release_date: string;
   tracks: any[] = [];
   loading: boolean;
+  error: boolean;
+  error_message: string;
 
   constructor(private _activedRoute: ActivatedRoute,
               private _spotifyService: SpotifyService) { }
@@ -38,8 +40,15 @@ export class AlbumComponent implements OnInit {
         this.release_date = data['release_date'];
         this.image = data['images'][0].url;
         this.loading = false;
-        // console.log(data);
+      }, (service_error) => {
+        this.error = true;    
+        this.error_message = service_error.error.message;
+        this.loading = false;
       })
+    }, (service_error) => {
+      this.error = true;    
+      this.error_message = service_error.error.message;
+      this.loading = false;
     });
   }
 

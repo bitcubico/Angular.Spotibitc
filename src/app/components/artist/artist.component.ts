@@ -29,6 +29,8 @@ export class ArtistComponent implements OnInit {
   genres: any[] = [];
   albumes: album[] = [];
   total_albumes: number;
+  error: boolean;
+  error_message: string;
 
   constructor(private _activedRoute: ActivatedRoute,
               private _spotifyService: SpotifyService) { }
@@ -51,9 +53,17 @@ export class ArtistComponent implements OnInit {
           this.top_tracks = data;
           console.log(this.top_tracks);
           this.loading = false;
+        }, (service_error) => {
+          this.error = true;    
+          this.error_message = service_error.error.message;
+          this.loading = false;
         });
         
         console.log(data);
+      }, (service_error) => {
+        this.error = true;    
+        this.error_message = service_error.error.message;
+        this.loading = false;
       });
     });
   }
@@ -80,6 +90,10 @@ export class ArtistComponent implements OnInit {
       console.log(this.total_albumes);
       console.log(data);
       this.loading_album = false;
+    }, (service_error) => {
+      this.error = true;    
+      this.error_message = service_error.error.message;
+      this.loading = false;
     });
   }
 }

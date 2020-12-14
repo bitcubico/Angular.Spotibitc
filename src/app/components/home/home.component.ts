@@ -12,7 +12,9 @@ export class HomeComponent implements OnInit {
 
   newReleases: any[] = [];
   loading: boolean;
-
+  error: boolean;
+  error_message: string;
+  
   constructor(private _spotifyService: SpotifyService,
               private _router: Router) 
   {
@@ -22,6 +24,10 @@ export class HomeComponent implements OnInit {
         console.log(data);
         this.newReleases = data.items;
         console.log(this.newReleases);
+        this.loading = false;
+      }, (service_error) => {
+        this.error = true;    
+        this.error_message = service_error.error.message;
         this.loading = false;
       });
   }

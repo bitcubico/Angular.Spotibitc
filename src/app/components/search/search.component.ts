@@ -11,8 +11,10 @@ export class SearchComponent implements OnInit {
 
   resultSearch: any[] = [];
   loading: boolean;
+  error: boolean;
+  error_message: string;
 
-  constructor(private _spotifyService: SpotifyService) { }
+  constructor(private _spotifyService: SpotifyService) { this.error = false; }
 
   ngOnInit(): void {
   }
@@ -24,6 +26,10 @@ export class SearchComponent implements OnInit {
         console.log(data);
         this.resultSearch = data.items;
         console.log(this.resultSearch);
+        this.loading = false;
+      }, (service_error) => {
+        this.error = true;    
+        this.error_message = service_error.error.message;
         this.loading = false;
       });
   }

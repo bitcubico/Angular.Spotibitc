@@ -1,5 +1,8 @@
 <div class="container mt-5">
     <app-loading *ngIf="loading"></app-loading>
+    <div class="mt-3">
+        <app-alerts alert_type='danger' [show_alert]=error [message]=error_message></app-alerts>
+    </div>
     <div class="card-columns">
         <app-card [id_album]="album.id" [title]="album.name" [artists]="album.artists" [image]="album.images | noimage" *ngFor="let album of newReleases"></app-card>
     </div>
